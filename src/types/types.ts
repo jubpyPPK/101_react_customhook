@@ -1,8 +1,8 @@
-import React from "react";
-import exp from "node:constants";
+import React from 'react';
+import exp from 'node:constants';
 
-export type PostProps = { title: string, body: string }
-export type OptionInfo = { id: string, value: string, label: string }
+export type PostProps = { title: string; body: string };
+export type OptionInfo = { id: string; value: string; label: string };
 // export type InputProps = {
 //     id : string
 //     name : string,
@@ -17,33 +17,32 @@ export type OptionInfo = { id: string, value: string, label: string }
 // }
 
 export interface Validation {
-    required?: boolean;
-    minLength?: number;
-    maxLength?: number;
+  required?: boolean;
+  minLength?: number;
+  maxLength?: number;
 }
 
 export interface InputProps {
-    id: string;
-    name: string;
-    label: string;
-    type: 'text' | 'select';
-    value?: string | string[] | number;
-    placeholder?: string;
-    required?: boolean;
-    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  id: string;
+  name: string;
+  label: string;
+  type: 'text' | 'select';
+  value?: string | string[] | number;
+  placeholder?: string;
+  required?: boolean;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export interface InputState {
-    [key: string]: string | number | string[]
+  [key: string]: string | number | string[];
 }
 
 export interface InputState2<T> {
-    [key: string]: T
+  [key: string]: T;
 }
 
-
 export interface OptionData {
-    id: string;
-    value: string | number | string[];
-    label: string;
+  id: string;
+  value: string | number | string[];
+  label: string;
 }
