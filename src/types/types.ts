@@ -47,3 +47,7 @@ export interface OptionData {
     value: string | number | string[];
     label: string;
 }
+
+export interface User {
+    name: string;
+}
