@@ -6,45 +6,62 @@ const useFormInputs = (initialValue: InputState, inputProps: InputProps[]) => {
   const [errors, setErrors] = useState<InputState>({});
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
 
-  const handleOnSubmit = (
-    event: React.FormEvent<HTMLFormElement>
-  ): InputState => {
+  const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     validateRequired();
-    return inputs;
   };
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
+    let { name, value } = event.target;
+    console.log(name, value);
     setInputs((prevInputs) => ({
       ...prevInputs,
       [name]: value,
     }));
+    validateOnChange(name, value);
   };
 
   const resetForm = () => {
     setInputs(initialValue);
+    setErrors({});
+  };
+
+  const validateOnChange = (name: string, value: string) => {
+    inputProps
+      .filter((prop) => prop.name === name && prop.required)
+      .forEach((prop) => {
+        if (!value || value === "") {
+          setErrors((prevErrors) => ({
+            ...prevErrors,
+            [name]: "This field is required.",
+          }));
+        } else {
+          if (errors[name]) {
+            setErrors((prevErrors) => {
+              const { [name]: _, ...newErrors } = prevErrors;
+              return newErrors;
+            });
+          }
+        }
+      });
   };
 
   const validateRequired = () => {
+    const newErrors: InputState = {};
     inputProps
       .filter((prop) => prop.required)
       .forEach((prop) => {
         let key = prop.name;
         let value = inputs[key];
-
         if (!value || value === "") {
-          setErrors({
-            ...errors,
-            [key]: "This field is required.",
-          });
+          newErrors[key] = "This field is required.";
         } else {
-          setErrors({
-            ...errors,
-            [key]: "",
-          });
+          if (newErrors[key]) {
+            delete newErrors[key];
+          }
         }
       });
+    setErrors(newErrors);
   };
 
   const validateButtonDisabled = () => {

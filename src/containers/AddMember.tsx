@@ -23,31 +23,30 @@ const inputForm: Omit<InputProps, "value" | "onChange">[] = [
   },
 ];
 
-interface AddUsersProps {
-  formData?: InputState[];
-  setFormData: (formDataList: InputState[]) => void;
+interface AddMemberProps {
+  onSubmit: (values: InputState) => void;
 }
 
-const AddUsers = ({ formData = [], setFormData }: AddUsersProps) => {
+const AddMember: React.FC<AddMemberProps> = ({ onSubmit }) => {
+  const initialInputValue = { name: "" };
+
   const { inputs, errors, handleOnChange, handleOnSubmit } = useFormInputs(
-    {
-      name: "",
-    },
+    initialInputValue,
     inputForm
   );
 
-  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const newInputs = handleOnSubmit(event);
-    console.log(newInputs);
-    console.log(formData);
-    setFormData([...formData, newInputs]);
+    handleOnSubmit(event);
+    if (Object.keys(errors).length === 0) {
+      onSubmit(inputs);
+    }
   };
 
   return (
     <div>
       <h3>Add Member</h3>
-      <MyForm onSubmit={onSubmit}>
+      <MyForm onSubmit={handleSubmit}>
         {inputForm.map((item) => (
           <Inputs
             key={item.id}
@@ -62,4 +61,4 @@ const AddUsers = ({ formData = [], setFormData }: AddUsersProps) => {
     </div>
   );
 };
-export default AddUsers;
+export default AddMember;

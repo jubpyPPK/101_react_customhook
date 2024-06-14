@@ -103,12 +103,12 @@ const PostForm = () => {
   return (
     <div>
       <h1>PostForm</h1>
-      <MyForm onSubmit={handleOnSubmit}>
+      {/* <MyForm onSubmit={handleOnSubmit}>
         {inputForm.map((item) => (
           <Inputs
             key={item.id}
             value={inputs[item.name]}
-            onChange={handleOnChange}
+            onChangeHandler={handleOnChange}
             error={(errors[item.name] as string) || ""}
             optionData={(options[item.name] as OptionData[]) || undefined}
             {...item}
@@ -125,7 +125,7 @@ const PostForm = () => {
             <Inputs
               key={item.id}
               value={myInputs[item.name]}
-              onChange={myHandleOnChange}
+              onChangeHandler={myHandleOnChange}
               error={(myErrors[item.name] as string) || ""}
               optionData={(options[item.name] as OptionData[]) || undefined}
               {...item}
@@ -134,7 +134,7 @@ const PostForm = () => {
           <button type="submit">Submit</button>
           <button onClick={myResetForm}>Reset</button>
         </MyForm>
-      </Parents>
+      </Parents> */}
     </div>
   );
 };

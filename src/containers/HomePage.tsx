@@ -1,19 +1,24 @@
 import React, { useState } from "react";
-import AddUsers from "./AddUsers";
 import { InputState, User } from "../types/types";
 import MyTable from "../components/MyTable";
-import AddOrders from "./AddOrders";
+import AddMember from "./AddMember";
+import AddOrder from "./AddOrder";
 
 const HomePage = () => {
-  const [users, setUsers] = useState<InputState[]>([]);
+  const [members, setMembers] = useState<InputState[]>([]);
   const [orders, setOrders] = useState<InputState[]>([]);
+
+  const addUserHandler = (value: InputState) => {
+    console.log(value);
+    setMembers([...members, value]);
+  };
 
   return (
     <div>
       <h1>HomePage</h1>
-      <AddUsers formData={users} setFormData={setUsers} />
-      <AddOrders formData={orders} setFormData={setOrders} />
-      <MyTable users={users} orders={orders} />
+      <AddMember onSubmit={addUserHandler} />
+      <AddOrder members={members} />
+      <MyTable members={members} orders={orders} />
     </div>
   );
 };

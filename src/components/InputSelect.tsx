@@ -7,10 +7,6 @@ const Select = styled(Form.Select)`
   border-color: ${(props) => (props.isInvalid ? "red" : "none")};
 `;
 
-function OptionList(props: { values: OptionData[] }) {
-  return null;
-}
-
 const InputSelect: React.FC<
   InputProps & { error: string } & { optionData: OptionData[] }
 > = ({ name, placeholder, value, onChange, error, optionData }) => {
